@@ -22,8 +22,46 @@ export const App = () => {
   const [loadMore, setLoadMore] = useState(false);
   const [loading, setLoading] = useState(false);
 
+  // useEffect(() => {}, []);
+
+  // componentDidUpdate(prevProps, prevState) {
+  //   const { searchInputValue, page } = this.state;
+
+  // if (
+  //   page !== prevState.page ||
+  //   searchInputValue !== prevState.searchInputValue
+  // ) {
+  // this.setState({ loading: true });
+
+  // axiosGetImg(searchInputValue, page)
+  //   .then(response => {
+  //     if (response.data.hits.length > 0) {
+  //       this.setState(prev => ({
+  //         photos: [...prev.photos, ...response.data.hits],
+  //         loadMore: prev.page < Math.ceil(response.data.totalHits / 12),
+  //       }));
+  //     } else {
+  //       this.setState({ loadMore: false });
+  //     }
+  //   })
+  //   .catch(error => {
+  //     this.setState({ error: error.message });
+  //   })
+  //   .finally(() => {
+  //     this.setState({ loading: false });
+  //   });
+  //   }
+  // }
+
   useEffect(() => {
+    // if (
+    //   page !== prevState.page ||
+    //   searchInputValue !== prevState.searchInputValue
+    // ) {}
+
     if (!searchInputValue) return;
+    // if (page !== 1 || searchInputValue !== '') {
+    //   this.setState({ loading: true });
 
     setLoading(true);
 
@@ -32,17 +70,32 @@ export const App = () => {
         if (response.data.hits.length > 0) {
           setPhotos(prev => [...prev, ...response.data.hits]);
           setLoadMore(page < Math.ceil(response.data.totalHits / 12));
+          // this.setState(prev => ({
+          //   photos: [...prev.photos, ...response.data.hits],
+          //   loadMore: prev.page < Math.ceil(response.data.totalHits / 12),
+          // }));
         } else {
           setLoadMore(false);
+          // this.setState({ loadMore: false });
         }
       })
       .catch(error => {
         setError(error.message);
+        // this.setState({ error: error.message });
       })
       .finally(() => {
         setLoading(false);
+        // this.setState({ loading: false });
       });
   }, [page, searchInputValue]);
+
+  // const toggleModal = ({ largeImageURL = '', tags = '' } = {}) => {
+  //   this.setState(({ showModal }) => ({
+  //     showModal: !showModal,
+  //     largeImageURL: largeImageURL,
+  //     tags: tags,
+  //   }));
+  // };
 
   const toggleModal = ({ largeImageURL = '', tags = '' } = {}) => {
     setShowModal(!showModal);
@@ -54,10 +107,12 @@ export const App = () => {
     setSearchInputValue(searchInputValue);
     setPhotos([]);
     setPage(1);
+    // this.setState({ searchInputValue, photos: [], page: 1 });
   };
 
   const handleLoadMore = () => {
     setPage(prevState => prevState + 1);
+    // this.setState(prev => ({ page: prev.page + 1 }));
   };
 
   return (
@@ -96,3 +151,105 @@ App.propTypes = {
   loadMore: PropTypes.bool,
   loading: PropTypes.bool,
 };
+
+// export class App extends Component {
+//   static propTypes = {
+//     searchInputValue: PropTypes.string,
+//     page: PropTypes.number,
+//     photos: PropTypes.array,
+//     showModal: PropTypes.bool,
+//     largeImageURL: PropTypes.string,
+//     tags: PropTypes.string,
+//     loadMore: PropTypes.bool,
+//     loading: PropTypes.bool,
+//   };
+
+//   state = {
+//     searchInputValue: '',
+//     page: 1,
+//     photos: [],
+//     largeImageURL: '',
+//     tags: '',
+//     error: null,
+//     showModal: false,
+//     loadMore: false,
+//     loading: false,
+//   };
+
+//   componentDidUpdate(prevProps, prevState) {
+//     const { searchInputValue, page } = this.state;
+
+//     if (
+//       page !== prevState.page ||
+//       searchInputValue !== prevState.searchInputValue
+//     ) {
+//       this.setState({ loading: true });
+
+//       axiosGetImg(searchInputValue, page)
+//         .then(response => {
+//           if (response.data.hits.length > 0) {
+//             this.setState(prev => ({
+//               photos: [...prev.photos, ...response.data.hits],
+//               loadMore: prev.page < Math.ceil(response.data.totalHits / 12),
+//             }));
+//           } else {
+//             this.setState({ loadMore: false });
+//           }
+//         })
+//         .catch(error => {
+//           this.setState({ error: error.message });
+//         })
+//         .finally(() => {
+//           this.setState({ loading: false });
+//         });
+//     }
+//   }
+
+//   toggleModal = ({ largeImageURL = '', tags = '' } = {}) => {
+//     this.setState(({ showModal }) => ({
+//       showModal: !showModal,
+//       largeImageURL: largeImageURL,
+//       tags: tags,
+//     }));
+//   };
+
+//   handleFormSubmit = searchInputValue => {
+//     this.setState({ searchInputValue, photos: [], page: 1 });
+//   };
+
+//   handleLoadMore = () => {
+//     this.setState(prev => ({ page: prev.page + 1 }));
+//   };
+
+//   render() {
+//     const { photos, showModal, largeImageURL, loadMore, loading, tags } =
+//       this.state;
+
+//     return (
+//       <Container>
+//         <Searchbar onSubmit={this.handleFormSubmit} />
+
+//         {photos.length > 0 && (
+//           <ImageGallery photos={photos} onClick={this.toggleModal} />
+//         )}
+
+//         {showModal && (
+//           <Modal
+//             onClose={this.toggleModal}
+//             largeImageURL={largeImageURL}
+//             tags={tags}
+//           />
+//         )}
+
+//         {loading && <Loader />}
+
+//         <Button
+//           onLoadMore={this.handleLoadMore}
+//           loadMore={loadMore && !loading}
+//         />
+
+//         <ToastContainer autoClose={3000} />
+//       </Container>
+//     );
+//   }
+// }

@@ -24,6 +24,14 @@ export const Modal = ({ largeImageURL, tags, onClose }) => {
     }
   };
 
+  // componentDidMount() {
+  //   window.addEventListener('keydown', this.handleKeyDown);
+  // }
+
+  // componentWillUnmount() {
+  //   window.removeEventListener('keydown', this.handleKeyDown);
+  // }
+
   return createPortal(
     <Overlay onClick={handleBackdropClick}>
       <ModalWindow>
@@ -39,3 +47,42 @@ Modal.propTypes = {
   largeImageURL: PropTypes.string.isRequired,
   tags: PropTypes.string,
 };
+
+// export class Modal extends Component {
+//   static propTypes = {
+//     onClose: PropTypes.func.isRequired,
+//     largeImageURL: PropTypes.string.isRequired,
+//     tags: PropTypes.string,
+//   };
+
+//   componentDidMount() {
+//     window.addEventListener('keydown', this.handleKeyDown);
+//   }
+
+//   componentWillUnmount() {
+//     window.removeEventListener('keydown', this.handleKeyDown);
+//   }
+
+//   handleKeyDown = e => {
+//     if (e.code === 'Escape') {
+//       this.props.onClose();
+//     }
+//   };
+
+//   handleBackdropClick = e => {
+//     if (e.currentTarget === e.target) {
+//       this.props.onClose();
+//     }
+//   };
+
+//   render() {
+//     return createPortal(
+//       <Overlay onClick={this.handleBackdropClick}>
+//         <ModalWindow>
+//           <img src={this.props.largeImageURL} alt={this.props.tags} />
+//         </ModalWindow>
+//       </Overlay>,
+//       modalRoot
+//     );
+//   }
+// }

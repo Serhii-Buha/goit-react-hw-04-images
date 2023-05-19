@@ -15,6 +15,7 @@ export const Searchbar = ({ onSubmit }) => {
 
   const handleInputChange = e => {
     setSearchInputValue(e.currentTarget.value.toLowerCase());
+    // this.setState({ searchInputValue: e.currentTarget.value.toLowerCase() });
   };
 
   const handleSubmit = e => {
@@ -30,6 +31,8 @@ export const Searchbar = ({ onSubmit }) => {
     onSubmit(searchInputValue);
 
     setSearchInputValue('');
+
+    // this.setState({ searchInputValue: '' });
   };
 
   return (
@@ -44,6 +47,8 @@ export const Searchbar = ({ onSubmit }) => {
           name="searchInputValue"
           value={searchInputValue}
           onChange={handleInputChange}
+          // value={this.state.searchInputValue}
+          // onChange={this.handleInputChange}
           // autoComplete="off"
           autoFocus
           placeholder="Search images and photos"
@@ -56,3 +61,54 @@ export const Searchbar = ({ onSubmit }) => {
 Searchbar.propTypes = {
   onSubmit: PropTypes.func.isRequired,
 };
+
+// export class Searchbar extends Component {
+//   static propTypes = {
+//     onSubmit: PropTypes.func.isRequired,
+//   };
+
+//   state = {
+//     searchInputValue: '',
+//   };
+
+//   handleInputChange = e => {
+//     this.setState({ searchInputValue: e.currentTarget.value.toLowerCase() });
+//   };
+
+//   handleSubmit = e => {
+//     e.preventDefault();
+
+//     if (this.state.searchInputValue.trim() === '') {
+//       toast.error(
+//         'Sorry, there are no images matching your search query. Please try again.'
+//       );
+//       return;
+//     }
+
+//     this.props.onSubmit(this.state.searchInputValue);
+
+//     this.setState({ searchInputValue: '' });
+//   };
+
+//   render() {
+//     return (
+//       <SearchbarHeader>
+//         <SearchForm onSubmit={this.handleSubmit}>
+//           <SearchButton type="submit">
+//             <SearchButtonSpan>Search</SearchButtonSpan>
+//           </SearchButton>
+
+//           <SearchButtonInput
+//             type="text"
+//             name="searchInputValue"
+//             value={this.state.searchInputValue}
+//             onChange={this.handleInputChange}
+//             autocomplete="off"
+//             // autofocus
+//             placeholder="Search images and photos"
+//           />
+//         </SearchForm>
+//       </SearchbarHeader>
+//     );
+//   }
+// }
