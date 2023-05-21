@@ -21,12 +21,21 @@ const axiosGetImg = async (currentSearchValue, page = 1) => {
       axiosOptions
     );
 
-    if (response.data.totalHits > 0) {
-      toast.success(`Hooray! We found ${response.data.totalHits} images.`);
+    const totalHits = response.data.totalHits;
+    const currentHits = response.data.hits.length;
 
-      if (response.data.totalHits <= page * 12) {
+    if (totalHits > 0) {
+      if (page === 1) {
+        if (totalHits <= 12) {
+          toast.info(
+            `We found ${totalHits} images, and you've reached the end of search results.`
+          );
+        } else {
+          toast.success(`Hooray! We found ${totalHits} images.`);
+        }
+      } else if (currentHits < 12) {
         toast.info(
-          `We're sorry, but you've reached the end of search results.`
+          `We found ${currentHits} images, and you've reached the end of search results.`
         );
       }
       return response;
