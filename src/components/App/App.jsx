@@ -118,11 +118,9 @@ export const App = () => {
   return (
     <Container>
       <Searchbar onSubmit={handleFormSubmit} />
-
       {photos.length > 0 && (
         <ImageGallery photos={photos} onClick={toggleModal} />
       )}
-
       {showModal && (
         <Modal
           onClose={toggleModal}
@@ -130,15 +128,15 @@ export const App = () => {
           tags={tags}
         />
       )}
-
       {loading && <Loader />}
-
       <Button onLoadMore={handleLoadMore} loadMore={loadMore && !loading} />
 
       <ToastContainer autoClose={3000} />
     </Container>
   );
 };
+// loadMore должно быть истинным (true) и loading должно быть ложным (false)
+
 
 App.propTypes = {
   searchInputValue: PropTypes.string,
