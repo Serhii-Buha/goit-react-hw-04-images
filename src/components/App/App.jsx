@@ -60,6 +60,10 @@ export const App = () => {
     // ) {}
 
     if (!searchInputValue) return;
+    //searchInputValue является пустой строкой (''), что интерпретируется как false.
+    //!searchInputValue инвертирует это значение, так что пустая строка ('') становится true.
+    //Таким образом, !searchInputValue вернет true, если searchInputValue является пустой строкой или другим "falsy" значением, и false в противном случае. В данном контексте, if (!searchInputValue) return; означает "если searchInputValue пустая строка или 'falsy' значение, остановить выполнение функции".
+
     // if (page !== 1 || searchInputValue !== '') {
     //   this.setState({ loading: true });
 
@@ -136,7 +140,6 @@ export const App = () => {
   );
 };
 // loadMore должно быть истинным (true) и loading должно быть ложным (false)
-
 
 App.propTypes = {
   searchInputValue: PropTypes.string,
